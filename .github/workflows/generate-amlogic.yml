@@ -1,4 +1,4 @@
-name: Generate RTA-WRT Amlogic Firmware
+name: Generate SWDMWW-WRT Amlogic Firmware
 
 on:
   workflow_dispatch:
@@ -6,9 +6,11 @@ on:
       release_branch:
         description: "Select the release branch:"
         required: true
-        default: "openwrt:24.10.0"
+        default: "openwrt:24.10.2"
         type: choice
         options:
+          - openwrt:24.10.2
+          - openwrt:24.10.1
           - openwrt:24.10.0
           - openwrt:23.05.5
           - immortalwrt:24.10.0
@@ -275,7 +277,7 @@ jobs:
             # Move and rename output files
             for file in bin/targets/"${{ env.TARGET_SYSTEM }}"/*rootfs.tar.gz; do
               if [ -f "$file" ]; then
-                new_name="RTA-WRT_$(basename "$file" .tar.gz)_${tunnel}.tar.gz"
+                new_name="SWDMWW-WRT_$(basename "$file" .tar.gz)_${tunnel}.tar.gz"
                 mv "$file" compiled_images/$new_name
               fi
             done
@@ -308,14 +310,14 @@ jobs:
             
             for file in compiled_images/*_${tunnel}.tar.gz; do
               if [ -f "$file" ]; then
-                mv "$file" amlogic-s9xxx-openwrt/openwrt-armvirt/RTA-WRT_openwrt-armsr-armv8-generic-rootfs.tar.gz
+                mv "$file" amlogic-s9xxx-openwrt/openwrt-armvirt/SWDMWW-WRT_openwrt-armsr-armv8-generic-rootfs.tar.gz
                 cd amlogic-s9xxx-openwrt
                 sudo ./remake -b ${{ env.openwrt_board }} -k ${{ inputs.openwrt_kernel }} -s 1024
                 
                 # Cari file output dan pindahkan
                 find ./openwrt/out/ -name "*.img.gz" | while read FILE_PATH; do
                   if [ -n "$FILE_PATH" ]; then
-                    NEW_NAME="RTA-WRT_$(basename "$FILE_PATH" .img.gz)_${tunnel}.img.gz"
+                    NEW_NAME="SWDMWW-WRT_$(basename "$FILE_PATH" .img.gz)_${tunnel}.img.gz"
                     sudo mv "$FILE_PATH" "$GITHUB_WORKSPACE/${{ env.WORKING_DIR }}/compiled_images/$NEW_NAME"
                   fi
                 done
@@ -358,8 +360,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: "rtawrt-amlogic-${{ env.BRANCH }}"
-          name: RTA-WRT-Amlogic-${{ env.BRANCH }}-${{ env.TUNNEL }}-${{ env.DATE }}
+          tag_name: "swdmwwwrt-amlogic-${{ env.BRANCH }}"
+          name: SWDMWW-WRT-Amlogic-${{ env.BRANCH }}-${{ env.TUNNEL }}-${{ env.DATE }}
           files: ${{ env.WORKING_DIR }}/compiled_images/*.gz
           prerelease: true
           generate_release_notes: true
