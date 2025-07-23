@@ -67,7 +67,6 @@ declare -a packages_custom=(
     "modeminfo|${REPOS[KIDDIN9]}"
     "luci-app-modeminfo|${REPOS[KIDDIN9]}"
     "atinout|${REPOS[KIDDIN9]}"
-    "luci-app-poweroff|${REPOS[KIDDIN9]}"
     "xmm-modem|${REPOS[KIDDIN9]}"
     "luci-app-lite-watchdog|${REPOS[KIDDIN9]}"
     "luci-theme-alpha|${REPOS[KIDDIN9]}"
