@@ -1,4 +1,4 @@
-name: Generate RTA-WRT Firmware
+name: Generate SWD-WRT Firmware
 
 on:
   workflow_dispatch:
@@ -279,7 +279,7 @@ jobs:
           # Move and rename output files
           for file in bin/targets/"${{ env.TARGET_SYSTEM }}"/*.img.gz; do
             if [ -f "$file" ]; then
-              new_name="RTA-WRT_$(basename "$file" .img.gz)_${MATRIXTUNNEL}.img.gz"
+              new_name="SWD-WRT_$(basename "$file" .img.gz)_${MATRIXTUNNEL}.img.gz"
               mv "$file" compiled_images/$new_name
             fi
           done
@@ -294,8 +294,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: "rtawrt-${{ env.BRANCH }}"
-          name: RTA-WRT-${{ env.BRANCH }}-${{ env.DATE }}
+          tag_name: "swdwrt-${{ env.BRANCH }}"
+          name: SWD-WRT-${{ env.BRANCH }}-${{ env.DATE }}
           files: ${{ env.WORKING_DIR }}/compiled_images/*.gz
           prerelease: true
           generate_release_notes: true
