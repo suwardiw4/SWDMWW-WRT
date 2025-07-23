@@ -113,7 +113,7 @@ PACKAGES+=" luci-theme-material luci-theme-argon luci-app-argon-config"
 PACKAGES+=" php8 php8-fastcgi php8-fpm php8-mod-session php8-mod-ctype php8-mod-fileinfo php8-mod-zip php8-mod-iconv php8-mod-mbstring"
 
 # More
-PACKAGES+=" luci-app-poweroff luci-app-log-viewer luci-app-ramfree"
+PACKAGES+=" luci-app-log-viewer luci-app-ramfree"
 
 # Handle profile-specific packages
 handle_profile_packages() {
