@@ -4,6 +4,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+
 # Global variables for configuration with improved type declaration
 declare -A CONFIG
 CONFIG=(
