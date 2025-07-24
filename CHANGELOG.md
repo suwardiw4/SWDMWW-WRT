@@ -18,7 +18,7 @@
 
 **Changelog Firmware** (12-02-2025)
 
-- Fix Script Startup
+- Fix Script Startup swd
 - s905x OPHUB Repack Only
 - Update Depends on Package
 - Add Docker
