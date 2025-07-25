@@ -315,6 +315,8 @@ jobs:
                 sudo ./remake -b ${{ env.openwrt_board }} -k ${{ inputs.openwrt_kernel }} -s 1024
                 
                 # Cari file output dan pindahkan
+                echo "Cari file output dan pindahkan...."
+
                 find ./openwrt/out/ -name "*.img.gz" | while read FILE_PATH; do
                   if [ -n "$FILE_PATH" ]; then
                     NEW_NAME="SWDMWW-WRT_$(basename "$FILE_PATH" .img.gz)_${tunnel}.img.gz"
